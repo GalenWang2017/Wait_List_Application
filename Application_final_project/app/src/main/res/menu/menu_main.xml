@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.complete.myapplication.MainActivity">
+    <item android:title="Sort by Title(A-Z)"
+        android:id="@+id/sbts"
+        />
+    <item android:title="Sort by Title(Z-A)"
+        android:id="@+id/sbtb"
+        />
+    <item android:title="Sort by Create time(A-Z)"
+        android:id="@+id/sbcts"
+        />
+    <item android:title="Sort by Create time(Z-A)"
+        android:id="@+id/sbctb"
+        />
+</menu>
