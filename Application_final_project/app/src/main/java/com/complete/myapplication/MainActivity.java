@@ -66,8 +66,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     myAdapter myAdapter;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
     MediaPlayer mPlayer;
-    //Preference autoUpdate;
-    //private AudioInputReader mAudioInputReader;
+
 
 
     @Override
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 b.putString("AlertTime",wl.getTimeout());
                 intent.putExtras(b);
                 startActivity(intent);
-                Toast.makeText(MainActivity.this,"Item Click",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"Item Click",Toast.LENGTH_SHORT).show();
             }
         });
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -148,14 +147,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                 Intent _intent=new Intent(MainActivity.this,Question.class);
                 startActivity(_intent);
-                /*Calendar c=Calendar.getInstance();
-                c.add(Calendar.SECOND,5);
-                Intent testnoitify =new Intent(getApplicationContext(),Notification_reciever.class);
-                PendingIntent pendingIntent =PendingIntent.getBroadcast(getApplicationContext(),100,testnoitify,PendingIntent.FLAG_UPDATE_CURRENT);
-                AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pendingIntent);
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES,pendingIntent);
-                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();*/
+
             }
         });
     }
@@ -195,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }else{
                 if(mPlayer!=null){
                     mPlayer.stop();
-                    mPlayer.release();
                 }
             }
         }
@@ -219,11 +210,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 String[] permissionsWeNeed = new String[]{ Manifest.permission.RECORD_AUDIO };
                 requestPermissions(permissionsWeNeed, MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE);
             }
-        } /*else {
-            // Otherwise, permissions were granted and we are ready to go!
-            MediaPlayer mPlay = MediaPlayer.create(getApplicationContext(),R.raw.music);
-            mPlay.start();
-        }*/
+        }
     }
 
     @Override
@@ -234,11 +221,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    MediaPlayer mPlayer;
-                    mPlayer =MediaPlayer.create(getApplicationContext(),R.raw.music);
-                    mPlayer.start();
-                    // The permission was granted! Start up the visualizer!
-                    //mAudioInputReader = new AudioInputReader(mVisualizerView, this);
 
                 } else {
                     Toast.makeText(this, "Can not play music.", Toast.LENGTH_LONG).show();

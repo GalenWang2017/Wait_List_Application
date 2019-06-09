@@ -22,7 +22,8 @@
             android:label="Add new Waiting to do"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Check_Item_Info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            ></activity>
         <activity
             android:name=".MainActivity"
             android:label="Wait List"
@@ -36,6 +37,9 @@
         <activity android:name=".Question"
             android:label="Question"
             android:parentActivityName=".MainActivity"/>
+        <activity android:name=".EditItem"
+            android:label="Edit"
+            android:parentActivityName=".Check_Item_Info"/>
 
         <receiver android:name=".Notification_reciever"/>
     </application>

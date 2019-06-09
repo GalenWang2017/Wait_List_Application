@@ -7,7 +7,7 @@
     tools:context=".ChildActivity">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/child_fab"
+        android:id="@+id/edit_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

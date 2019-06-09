@@ -42,8 +42,6 @@ public class Notification_reciever extends BroadcastReceiver {
             Intent repeat_intent = new Intent(context,MainActivity.class);
             repeat_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(context,times,repeat_intent,PendingIntent.FLAG_UPDATE_CURRENT);
-            //NotificationChannel notificationChannel=new NotificationChannel(id,describe,importencce);
-            //notificationManager.createNotificationChannel(notificationChannel);
             Notification.Builder builder = new Notification.Builder(context)
                     .setContentIntent(pendingIntent)
                     .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)

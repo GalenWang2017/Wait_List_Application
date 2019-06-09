@@ -65,10 +65,6 @@ public class ChildActivity extends AppCompatActivity {
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
         final int hour = calendar.get(Calendar.HOUR_OF_DAY);
         final int min = calendar.get(Calendar.MINUTE);
-
-        //final int is24hr = calendar.get(Calendar.AM_PM);
-        //final int sec = calendar.get(Calendar.SECOND);
-
         setdatebutton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -104,7 +100,7 @@ public class ChildActivity extends AppCompatActivity {
         });
         DBHelper dbHelper = new DBHelper(this);
         mDB=dbHelper.getWritableDatabase();
-        //Button button = (Button)findViewById(R.id.button);
+
         FloatingActionButton floatingActionButton = findViewById(R.id.child_fab);
         final EditText editText1 = (EditText)findViewById(R.id.editText1);
         final EditText editText2 = (EditText)findViewById(R.id.editText2);
