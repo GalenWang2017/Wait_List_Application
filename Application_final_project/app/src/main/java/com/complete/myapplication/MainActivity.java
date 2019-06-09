@@ -1,6 +1,9 @@
 package com.complete.myapplication;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -41,6 +44,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     FloatingActionButton fab;
     myAdapter myAdapter;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
+    MediaPlayer mPlayer;
     //private AudioInputReader mAudioInputReader;
 
 
@@ -133,6 +138,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 clicked();
             }
         });
+        FloatingActionButton qfab =findViewById(R.id.question_fab);
+        qfab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent _intent=new Intent(MainActivity.this,Question.class);
+                startActivity(_intent);
+                /*Calendar c=Calendar.getInstance();
+                c.add(Calendar.SECOND,5);
+                Intent testnoitify =new Intent(getApplicationContext(),Notification_reciever.class);
+                PendingIntent pendingIntent =PendingIntent.getBroadcast(getApplicationContext(),100,testnoitify,PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pendingIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES,pendingIntent);
+                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_SHORT).show();*/
+            }
+        });
     }
 
     private void setupSharedPreferences() {
@@ -158,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("sp_key")) {
-            MediaPlayer mPlayer=MediaPlayer.create(this,R.raw.music);
+            mPlayer=MediaPlayer.create(this,R.raw.music);
             if(sharedPreferences.getBoolean(key,getResources().getBoolean(R.bool.pref_play_music))){
                 if(mPlayer!=null){
                     mPlayer.start();
@@ -168,14 +190,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 //mPlayer.pause();
                 mPlayer.stop();
                 mPlayer.release();
-                mPlayer=null;
             }
         }
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Unregister VisualizerActivity as an OnPreferenceChangedListener to avoid any memory leaks.
         PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener((SharedPreferences.OnSharedPreferenceChangeListener) this);
     }

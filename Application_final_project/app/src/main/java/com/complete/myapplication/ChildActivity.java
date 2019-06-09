@@ -31,6 +31,7 @@ import java.util.Calendar;
 public class ChildActivity extends AppCompatActivity {
     SQLiteDatabase mDB;
     int y,m,_d,h,mi;
+    int times=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,7 @@ public class ChildActivity extends AppCompatActivity {
 
 
 
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,24 +126,24 @@ public class ChildActivity extends AppCompatActivity {
 
                     //is set up the notification
                     if(s.isChecked()){
-                        Calendar calendar1 = Calendar.getInstance();
-                        calendar1.set(Calendar.YEAR,y);
-                        calendar1.set(Calendar.MONTH,m);
-                        calendar1.set(Calendar.DAY_OF_MONTH,_d);
-                        calendar1.set(Calendar.HOUR_OF_DAY,h);
-                        calendar1.set(Calendar.MINUTE,mi);
+                        Calendar calendar1=Calendar.getInstance();
+                        calendar1.set(y,m-1,_d,h,mi,0);
+                        String tt=String.valueOf(y)+"/"+String.valueOf(m)+"/"+String.valueOf(_d)+" "+String.valueOf(h)+":"+String.valueOf(mi);
                         Intent notifyintent=new Intent(getApplicationContext(),Notification_reciever.class);
-                        PendingIntent pendingIntent =PendingIntent.getBroadcast(getApplicationContext(),100,notifyintent,PendingIntent.FLAG_ONE_SHOT);
-                        AlarmManager alarmManager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
-                        Toast.makeText(ChildActivity.this,"Set alarm.",Toast.LENGTH_SHORT).show();
+                        notifyintent.putExtra("times",times);
+                        notifyintent.putExtra("Title",editText1.getText().toString());
+                        PendingIntent pendingIntent =PendingIntent.getBroadcast(getApplicationContext(),times,notifyintent,PendingIntent.FLAG_UPDATE_CURRENT);
+                        AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
+                        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar1.getTimeInMillis(),pendingIntent);
+                        Toast.makeText(ChildActivity.this,tt,Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(ChildActivity.this,"Did not set alarm.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChildActivity.this,"Did not set alarm.",Toast.LENGTH_LONG).show();
                     }
 
                     Intent intent = new Intent();
                     intent.setClass(ChildActivity.this,MainActivity.class);
                     startActivity(intent);
+                    times+=1;
                 }
 
 
