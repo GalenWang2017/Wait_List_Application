@@ -17,6 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.SwitchPreference;
 import android.sax.StartElementListener;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -26,6 +27,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     myAdapter myAdapter;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
     MediaPlayer mPlayer;
+    //Preference autoUpdate;
     //private AudioInputReader mAudioInputReader;
 
 
@@ -160,18 +163,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void setupSharedPreferences() {
         // Get all of the values from shared preferences to set it up
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-       // mVisualizerView.setShowBass(sharedPreferences.getBoolean(getString(R.string.pref_show_bass_key),
-         //       getResources().getBoolean(R.bool.pref_show_bass_default)));
-        MediaPlayer mPlayer;
-        /*mPlayer =MediaPlayer.create(this,R.raw.music);
-            if(sharedPreferences.getBoolean("sp_key",getResources().getBoolean(R.bool.pref_play_music))){
-                if(mPlayer!=null){
-                    mPlayer.start();
-                }
 
-            }*/
-        // Register the listener
+        if(sharedPreferences.getBoolean("sp_key",true)){
+            if(mPlayer==null||!mPlayer.isPlaying()){
+                mPlayer=MediaPlayer.create(this,R.raw.music);
+                mPlayer.start();
+                mPlayer.setLooping(true);
+            }
+
+        }else{
+            if(mPlayer!=null){
+                mPlayer.stop();
+            }
+        }
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+
     }
     // Updates the screen if the shared preferences change. This method is required when you make a
     // class implement OnSharedPreferenceChangedListener
@@ -180,19 +187,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals("sp_key")) {
-            mPlayer=MediaPlayer.create(this,R.raw.music);
             if(sharedPreferences.getBoolean(key,getResources().getBoolean(R.bool.pref_play_music))){
-                if(mPlayer!=null){
+                if(mPlayer==null||!mPlayer.isPlaying()){
+                    mPlayer=MediaPlayer.create(getApplicationContext(),R.raw.music);
                     mPlayer.start();
                 }
-
             }else{
-                //mPlayer.pause();
-                mPlayer.stop();
-                mPlayer.release();
+                if(mPlayer!=null){
+                    mPlayer.stop();
+                    mPlayer.release();
+                }
             }
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

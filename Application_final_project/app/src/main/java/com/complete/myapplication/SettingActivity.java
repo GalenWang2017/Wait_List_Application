@@ -1,11 +1,15 @@
 package com.complete.myapplication;
 
 import android.os.Bundle;
+import android.preference.SwitchPreference;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
 
 public class SettingActivity extends AppCompatActivity {
     @Override
@@ -16,6 +20,7 @@ public class SettingActivity extends AppCompatActivity {
         if(ac != null){
             ac.setDisplayHomeAsUpEnabled(true);
         }
+
     }
 
     @Override

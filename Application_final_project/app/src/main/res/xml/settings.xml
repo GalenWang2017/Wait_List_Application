@@ -15,16 +15,14 @@
         <CheckBoxPreference
             android:key="cbp_key"
             android:title="Notification"
-            android:summary="What time do you want to notify"/>
-        <EditTextPreference
-            android:key="date_etp_key"
-            android:dependency="cbp_key"
-            android:title="Date"
+            android:summary="Notify every day"
             />
         <EditTextPreference
             android:key="time_etp_key"
-            android:dependency="date_etp_key"
+            android:dependency="cbp_key"
+            android:summary="What time do you want to notify every day?"
             android:title="Time"/>
+
 
     </PreferenceCategory>
 

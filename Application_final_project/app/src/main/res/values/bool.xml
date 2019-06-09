@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="pref_play_music">false</bool>
+    <bool name="pref_play_music">true</bool>
 </resources>
