@@ -48,6 +48,7 @@ public class Check_Item_Info extends AppCompatActivity {
             String ct = b.getString("CreateTime");
             String at = b.getString("AlertTime");
             setTitle(t);
+
             content.setText(c);
             createtime.setText(ct);
             alerttime.setText(at);

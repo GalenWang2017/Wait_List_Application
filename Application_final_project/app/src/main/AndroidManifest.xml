@@ -23,6 +23,7 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Check_Item_Info"
             android:parentActivityName=".MainActivity"
+
             ></activity>
         <activity
             android:name=".MainActivity"
@@ -39,7 +40,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".EditItem"
             android:label="Edit"
-            android:parentActivityName=".Check_Item_Info"/>
+            android:parentActivityName=".Check_Item_Info"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:name=".Notification_reciever"/>
     </application>

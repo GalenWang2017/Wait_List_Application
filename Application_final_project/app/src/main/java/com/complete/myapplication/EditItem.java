@@ -34,7 +34,6 @@ public class EditItem extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_item);
-        ActionBar actionBar=this.getSupportActionBar();
         b=this.getIntent().getExtras();
         DBHelper dbHelper = new DBHelper(this);
         mDB=dbHelper.getWritableDatabase();
@@ -116,8 +115,9 @@ public class EditItem extends AppCompatActivity {
                     PendingIntent pendingIntent =PendingIntent.getBroadcast(getApplicationContext(),0,notifyintent,PendingIntent.FLAG_UPDATE_CURRENT);
                     AlarmManager alarmManager=(AlarmManager) getSystemService(ALARM_SERVICE);
                     alarmManager.set(AlarmManager.RTC_WAKEUP,calendar1.getTimeInMillis(),pendingIntent);
-                    Toast.makeText(EditItem.this,"Set Alerm",Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditItem.this,"Editted",Toast.LENGTH_LONG).show();
                 }
+                Toast.makeText(EditItem.this,"Editted",Toast.LENGTH_LONG).show();
                 startActivity(i);
 
             }
